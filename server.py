@@ -1,13 +1,21 @@
 import json
 import sys
 
-from flask import Flask, request
+from flask import Flask, request, make_response
 from flask_cors import CORS
 
 from investment_calc.main import calculate
 
 app = Flask(__name__)
 CORS(app)
+
+
+@app.route('/.well-known/acme-challenge/3i-hK-59J1Lrab785r7nl6alEtojUrec8UxAoNC-Xkc')
+def letsencrypt_check():
+    response = make_response('3i-hK-59J1Lrab785r7nl6alEtojUrec8UxAoNC-Xkc.tkC2gBMWBXsjPRY1FEsD0Eb7EOJJCZXGlCrt7QorF5c',
+                             200)
+    response.mimetype = "text/plain"
+    return response
 
 
 @app.route('/calculate', methods=['GET'])
