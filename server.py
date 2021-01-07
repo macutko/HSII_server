@@ -1,4 +1,5 @@
 import json
+import sys
 
 from flask import Flask, request
 from flask_cors import CORS
@@ -23,8 +24,9 @@ def calculate_api():
             perc.append(float(item[0]))
 
         return {'division_perc': calculate(perc, deposit, money)}
-    except:
-        return "This is bad practice!"
+    except:  # catch *all* exceptions
+        e = sys.exc_info()[0]
+        return "<p>Error: %s</p>" % e
 
 
 if __name__ == '__main__':
