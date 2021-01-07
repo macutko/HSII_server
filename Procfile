@@ -1,1 +1,1 @@
-web: gunicorn --certfile cert.pem --keyfile key.pem wsgi:app
+web: gunicorn wsgi:app
