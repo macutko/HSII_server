@@ -11,17 +11,20 @@ CORS(app)
 
 @app.route('/calculate', methods=['GET'])
 def calculate_api():
-    deposit = float(request.args.get('deposit'))
+    try:
+        deposit = float(request.args.get('deposit'))
 
-    money = []
-    perc = []
+        money = []
+        perc = []
 
-    for item in json.loads(request.args.get('values')).values():
-        money.append(float(item[0]))
-    for item in json.loads(request.args.get('percentages')).values():
-        perc.append(float(item[0]))
+        for item in json.loads(request.args.get('values')).values():
+            money.append(float(item[0]))
+        for item in json.loads(request.args.get('percentages')).values():
+            perc.append(float(item[0]))
 
-    return {'division_perc': calculate(perc, deposit, money)}
+        return {'division_perc': calculate(perc, deposit, money)}
+    except:
+        return "This is bad practice!"
 
 
 if __name__ == '__main__':
