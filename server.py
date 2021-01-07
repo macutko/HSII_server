@@ -17,11 +17,11 @@ def letsencrypt_check():
     response.mimetype = "text/plain"
     return response
 
-#
-# @app.before_request
-# def before_request():
-#     if request.url.startswith('http://'):
-#         return redirect(request.url.replace('http://', 'https://'), code=301)
+
+@app.before_request
+def before_request():
+    if request.url.startswith('http://'):
+        return redirect(request.url.replace('http://', 'https://'), code=301)
 
 
 @app.route('/calculate', methods=['GET'])
