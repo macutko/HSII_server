@@ -26,7 +26,7 @@ def calculate_api():
         return {'division_perc': calculate(perc, deposit, money)}
     except:  # catch *all* exceptions
         e = sys.exc_info()[0]
-        return "<p>Error: %s</p>" % e
+        return "<p>Error \n %s</p>" % e
 
 
 if __name__ == '__main__':
