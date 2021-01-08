@@ -1,7 +1,7 @@
 import json
 import sys
 
-from flask import Flask, request, make_response, redirect
+from flask import Flask, request, make_response
 from flask_cors import CORS
 
 from investment_calc.main import calculate
@@ -18,10 +18,14 @@ def letsencrypt_check():
     return response
 
 
-@app.before_request
-def before_request():
-    if request.url.startswith('http://'):
-        return redirect(request.url.replace('http://', 'https://'), code=301)
+# @app.before_request
+# def before_request():
+#     if request.url.startswith('https://'):
+#         return redirect(request.url.replace('https://', 'http://'), code=301)
+
+@app.route("/")
+def hello():
+    return "<h1 style='color:blue'>Hello There!</h1>"
 
 
 @app.route('/calculate', methods=['GET'])
@@ -43,5 +47,7 @@ def calculate_api():
         return "<p>Error \n %s</p>" % e
 
 
-if __name__ == '__main__':
-    app.run(port=5000, debug=False)
+# if __name__ == '__main__':
+#     app.run(port=80, debug=False)
+if __name__ == "__main__":
+    app.run(host='0.0.0.0', debug=True)
